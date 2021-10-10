@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ category | title }}</h1>
+
+  <div class="navbar">
+    {% for category, label in categories.items() %}
+      <a href="{{ category }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+
+  <table style="border-spacing: .2em .9em">
+    <colgroup>
+      <col style="width: 20%">
+      <col style="width: 70%">
+      <col style="width: 10%">
+    </colgroup>
+    <tbody class="loctable">
+      <tr>
+        <td><strong>Name</strong></td>
+        <td><strong>Description</strong></td>
+      </tr>
+      {% for location in locations %}
+        <tr>
+          <td class="loc">{{ location.name }}</td>
+          <td class="desc">{{ location.description }}</td>
+          <td class="btns">
+            {% if location.category in ["recommended", "tovisit"] %}
+              <form method="POST">
+                <input type="submit" class="up" name="{{ location.name }}" value=&#8599;>
+                <input type="submit" class="del" name="{{ location.name }}" value="X">
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h1>New Location</h1>
+  <form
+    class="addform"
+    method="POST"
+    action="{{ url_for('add_location') }}"
+  >
+    {{ add_location.hidden_tag() }}
+    <table>
+      <colgroup>
+        <col style="width: 40%">
+        <col style="width: 40%">
+        <col style="width: 20%">
+      </colgroup>
+      <tbody>
+        <tr>
+          <td>{{ add_location.name.label }}</td>
+          <td>{{ add_location.description.label }}</td>
+          <td>{{ add_location.category.label }}</td>
+        </tr>
+        <tr>
+          <td>{{ add_location.name() }}</td>
+          <td>{{ add_location.description() }}</td>
+          <td>
+            {% for button in add_location.category %}
+              <div>{{ button() }}{{ button.label }}</div>
+            {% endfor %}
+
+          </td>
+        </tr>
+        <tr>
+          <td>{{ add_location.submit() }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+{% endblock %}
