@@ -38,38 +38,7 @@
   </table>
 
   <h1>New Location</h1>
-  <form
-    class="addform"
-    method="POST"
-    action="{{ url_for('add_location') }}"
-  >
-    {{ add_location.hidden_tag() }}
-    <table>
-      <colgroup>
-        <col style="width: 40%">
-        <col style="width: 40%">
-        <col style="width: 20%">
-      </colgroup>
-      <tbody>
-        <tr>
-          <td>{{ add_location.name.label }}</td>
-          <td>{{ add_location.description.label }}</td>
-          <td>{{ add_location.category.label }}</td>
-        </tr>
-        <tr>
-          <td>{{ add_location.name() }}</td>
-          <td>{{ add_location.description() }}</td>
-          <td>
-            {% for button in add_location.category %}
-              <div>{{ button() }}{{ button.label }}</div>
-            {% endfor %}
 
-          </td>
-        </tr>
-        <tr>
-          <td>{{ add_location.submit() }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
+  {% include 'new_location_form.html' %}
+
 {% endblock %}
