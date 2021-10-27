@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <h1>Your Favorite emojis</h1>
+    <ul>
+    {% for emoji in emojis %}
+        <li>
+            <a href="/emojis/{{ emoji.name }}">
+                {{ emoji.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

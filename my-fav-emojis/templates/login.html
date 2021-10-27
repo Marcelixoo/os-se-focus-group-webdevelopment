@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <style>
+        input, form {
+            display: block;
+            width: auto;
+        }
+
+        form > button {
+            width: auto;
+        }
+    </style>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.email.label }}
+            {{ form.email() }}
+        </p>
+        <p>
+            {{ form.password.label }}
+            {{ form.password() }}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+    <p>
+        <a href="/register">Click here to register!</a>
+    </p>
+{% endblock %}

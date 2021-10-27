@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emojis API</title>
+
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a> |
+        {% if current_user.is_authenticated %}
+            Logged in as {{ current_user.email }}
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Sign In</a> |
+            <a href="/register">Sign Up</a>
+        {% endif %}
+    </div>
+    {% if get_flashed_messages() %}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+            >&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>
